@@ -1,402 +1,491 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Basic SEO -->
-  <meta charset="UTF-8" />
+  <!-- Meta Basics -->
+  <meta charset="utf-8" />
+  <meta http-equiv="x-ua-compatible" content="ie=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Multi-Material CNC Machining — Modern Guide, Design Tips, and Best Practices</title>
-  <meta name="description" content="A modern, professional one-page guide to multi-material CNC machining: design rules, tolerances, bonding methods, tooling strategies, finishes, and tips to move from prototype to production." />
-  <link rel="canonical" href="https://your-github-username.github.io/your-repo-name/" />
 
-  <!-- Open Graph / Twitter -->
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content="Multi-Material CNC Machining — Modern Guide" />
-  <meta property="og:description" content="Learn how to plan, design, and produce multi-material CNC parts with confidence. Tolerances, fixtures, finishes, and cost controls included." />
-  <meta property="og:url" content="https://your-github-username.github.io/your-repo-name/" />
-  <meta property="og:image" content="https://your-github-username.github.io/your-repo-name/og-image.png" />
+  <!-- SEO -->
+  <title>Multi Material Machining | Design, Tolerances, Joining & Cost</title>
+  <meta name="description" content="A practical, 1000+ word guide to multi material machining: benefits, trade-offs, material pairings, design for hybrid machining, joining strategies, quality, reliability, cost, and lead time." />
+  <meta name="keywords" content="multi material machining, multi-material manufacturing, hybrid machining design, hybrid manufacturing, machining composites and metals, dissimilar material joining" />
+  <link rel="canonical" href="https://your-github-username.github.io/" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Multi Material Machining" />
+  <meta property="og:description" content="Modern, engineer-friendly guide to multi-material machining and hybrid manufacturing." />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://your-github-username.github.io/" />
+
+  <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Multi-Material CNC Machining — Modern Guide" />
-  <meta name="twitter:description" content="From concept to production: practical advice for multi-material CNC machining." />
-  <meta name="twitter:image" content="https://your-github-username.github.io/your-repo-name/og-image.png" />
+  <meta name="twitter:title" content="Multi Material Machining" />
+  <meta name="twitter:description" content="Practical guidance for designers and manufacturing teams on hybrid machining." />
 
-  <!-- Robots -->
-  <meta name="robots" content="index, follow" />
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet" />
 
-  <!-- Tailwind CSS (CDN) -->
-  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Styles -->
   <style>
-    /* Smooth anchor scrolling for a pleasant UX */
-    html { scroll-behavior: smooth; }
-    /* Gradient background noise effect (subtle) */
-    .soft-gradient {
-      background: radial-gradient(1200px 600px at 50% -10%, rgba(99,102,241,.18), transparent 60%),
-                  radial-gradient(800px 400px at 0% 20%, rgba(56,189,248,.14), transparent 60%),
-                  radial-gradient(800px 400px at 100% 30%, rgba(16,185,129,.12), transparent 60%);
+    :root{
+      --bg:#0d1117;
+      --card:#111827;
+      --text:#e5e7eb;
+      --muted:#9ca3af;
+      --title-grad-start:#1e40af;
+      --title-grad-end:#2563eb;
+      --link:#60a5fa;
+      --link-hover:#93c5fd;
+      --h2:#2dd4bf; /* H2 → soft teal */
+      --h3:#38bdf8; /* H3 → sky blue */
+      --glow:0 2px 8px rgba(0,0,0,.3);
+      --radius:12px;
+      --border:1px solid rgba(255,255,255,.06);
+      --accent-ring:0 0 0 3px rgba(37,99,235,.15);
     }
-    /* Replacing Tailwind @apply with plain CSS so it works on GitHub Pages out of the box */
-    .pro-card {
-      border-radius: 1rem;            /* rounded-2xl */
-      box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -4px rgba(0,0,0,0.1); /* shadow-lg */
-      border: 1px solid rgba(0,0,0,0.05); /* ring-1 ring-black/5 */
-      background: #ffffff;            /* bg-white */
+    *{box-sizing:border-box}
+    html {scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Open Sans","Helvetica Neue",Arial,sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      line-height:1.65;
+      -webkit-font-smoothing:antialiased;
+      text-rendering:optimizeLegibility;
     }
-    .section-anchor { scroll-margin-top: 120px; }
+    a{color:var(--link);text-decoration:none}
+    a:hover{color:var(--link-hover)}
+    .container{
+      width:min(100%,1100px);
+      margin-inline:auto;
+      padding:24px clamp(16px,3vw,32px);
+    }
+
+    /* Header */
+    header{
+      padding:36px 0 8px;
+      text-align:center;
+    }
+    .title{
+      font-weight:900;
+      font-size: clamp(2rem, 3.8vw + 1rem, 4rem);
+      line-height:1.1;
+      margin:0;
+      background:linear-gradient(92deg,var(--title-grad-start),var(--title-grad-end));
+      -webkit-background-clip:text; background-clip:text; color:transparent;
+      letter-spacing:.3px;
+    }
+    .subtitle{
+      color:var(--muted);
+      margin:10px auto 0;
+      width:min(100%, 820px);
+      font-size:1.02rem;
+      text-align:center;
+    }
+
+    /* TOC List */
+    .toc{
+      margin:24px auto 18px;
+      width:min(100%, 860px);
+      background:var(--card);
+      border-radius:var(--radius);
+      border:var(--border);
+      box-shadow:var(--glow);
+      padding:16px 18px;
+      animation:fadeIn .6s ease both .05s;
+    }
+    .toc h2{
+      margin:0 0 8px; font-size:1.1rem; font-weight:700; color:var(--h3);
+    }
+    .toc ul{
+      list-style:disc; padding-left:1.25rem; margin:0; display:block;
+    }
+    .toc li{ margin:8px 0; }
+    .toc a{
+      padding:2px 0;
+      border-bottom:1px dashed transparent;
+      transition:border-color .2s ease, color .2s ease;
+    }
+    .toc a:hover{ border-color:rgba(96,165,250,.35) }
+
+    /* Section Cards */
+    section{
+      margin:18px auto;
+      width:min(100%, 860px);
+      background:var(--card);
+      border-radius:var(--radius);
+      border:var(--border);
+      box-shadow:var(--glow);
+      padding:20px clamp(18px, 2.2vw, 28px);
+      opacity:0; transform:translateY(10px); /* reveal base */
+      will-change:opacity, transform;
+    }
+    section.revealed{ opacity:1; transform:none; transition:opacity .6s ease, transform .6s ease }
+
+    /* Headings Inside Boxes */
+    .sec-head{
+      display:flex; align-items:center; gap:10px;
+      margin:-6px 0 10px;
+      padding:10px 12px;
+      background:rgba(255,255,255,.02);
+      border-radius:10px;
+      border:1px solid rgba(255,255,255,.06);
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.03);
+    }
+    h2{
+      color:var(--h2);
+      font-size: clamp(1.4rem, 1.2rem + 1.2vw, 2rem);
+      line-height:1.2; margin:0;
+    }
+    h3{
+      color:var(--h3);
+      font-size: clamp(1.1rem, 0.95rem + .6vw, 1.35rem);
+      margin:16px 0 6px;
+    }
+    p{margin:10px 0}
+    ul,ol{margin:10px 0 10px 1.2rem}
+    li{margin:.35rem 0}
+    .note{
+      font-size:.95rem; color:var(--muted);
+      border-left:3px solid rgba(56,189,248,.4);
+      padding-left:.75rem; margin:.6rem 0;
+    }
+
+    /* Callouts / Pills */
+    .pill{
+      display:inline-block; font-size:.85rem; font-weight:600;
+      padding:.25rem .55rem; border-radius:999px;
+      border:1px solid rgba(255,255,255,.08);
+      background:rgba(255,255,255,.03);
+      margin-right:.35rem;
+    }
+
+    /* Collapsible FAQs */
+    details{
+      background:rgba(255,255,255,.02);
+      border:1px solid rgba(255,255,255,.06);
+      border-radius:10px;
+      padding:10px 12px;
+      margin:10px 0;
+      transition:background .2s ease, border-color .2s ease;
+    }
+    details:hover{ border-color:rgba(96,165,250,.35) }
+    summary{
+      list-style:none;
+      cursor:pointer;
+      font-weight:700;
+      color:var(--h3);
+      outline:none;
+    }
+    summary::-webkit-details-marker{ display:none }
+    details[open]{ background:rgba(255,255,255,.03) }
+    details p{ margin-top:8px }
+
+    /* Footer */
+    footer{
+      text-align:center; color:var(--muted);
+      width:min(100%, 860px);
+      margin:40px auto 60px;
+      font-size:.95rem;
+    }
+
+    /* Accessibility: focus */
+    a:focus-visible, summary:focus-visible{
+      outline:none; box-shadow:var(--accent-ring);
+      border-radius:6px;
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+      from{opacity:0; transform:translateY(6px)}
+      to{opacity:1; transform:none}
+    }
+
+    /* Code-friendly monospace (if needed in examples) */
+    code, pre{font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace; font-size:.95em}
   </style>
-
-  <!-- Structured Data (Website + Organization) -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    "name": "Multi-Material CNC Machining — Modern Guide",
-    "url": "https://your-github-username.github.io/your-repo-name/",
-    "potentialAction": {
-      "@type": "SearchAction",
-      "target": "https://your-github-username.github.io/your-repo-name/?q={search_term_string}",
-      "query-input": "required name=search_term_string"
-    }
-  }
-  </script>
 </head>
-<body class="antialiased text-slate-800 bg-slate-50">
-  <!-- Top notice with external link (as requested) -->
-  <div class="w-full bg-slate-900 text-slate-100 text-sm">
-    <div class="max-w-6xl mx-auto px-4 py-2 text-center">
-      Start here: <a class="underline font-medium hover:text-sky-300" href="https://proleantech.com" target="_blank" rel="noopener">ProleanTech</a>
-    </div>
-  </div>
-
-  <!-- Header / Hero -->
-  <header class="soft-gradient">
-    <div class="max-w-6xl mx-auto px-6 py-20 md:py-28">
-      <div class="pro-card bg-gradient-to-br from-white to-slate-50 p-10 md:p-16 text-center">
-        <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight text-slate-900">
-          Multi-Material CNC Machining
-        </h1>
-        <p class="mt-6 text-lg md:text-xl text-slate-600">
-          A modern, practical guide to designing and producing parts that combine metals, polymers, and composites—without surprises on tolerance, cost, or lead time.
-        </p>
-        <div class="mt-8 flex items-center justify-center gap-4">
-          <a href="#toc" class="inline-block rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 font-semibold">Explore the Guide</a>
-          <a href="#cta" class="inline-block rounded-xl bg-white hover:bg-slate-50 border border-indigo-100 text-indigo-700 px-6 py-3 font-semibold">Get a Quote</a>
-        </div>
-      </div>
-    </div>
+<body>
+  <!-- Header -->
+  <header class="container" id="top">
+    <h1 class="title">Multi Material Machining</h1>
+    <p class="subtitle">
+      Multi material machining combines metals, polymers, and composites in a single assembly or monolithic build to optimize weight, function, and cost. This article provides practical guidance—from early design choices and tolerancing to manufacturing routes, joining, and inspection—so engineers and product teams can implement hybrid solutions with confidence.
+    </p>
   </header>
 
-  <!-- Navigation / Table of Contents -->
-  <nav id="toc" class="sticky top-0 z-40 bg-white/90 backdrop-blur supports-backdrop-blur pro-card max-w-6xl mx-auto mt-6 px-4 md:px-6 py-4">
-    <div class="flex flex-wrap items-center justify-center gap-3 text-sm md:text-base">
-      <a class="px-3 py-2 rounded-lg hover:bg-slate-100" href="#overview">Overview</a>
-      <a class="px-3 py-2 rounded-lg hover:bg-slate-100" href="#how-it-works">How It Works</a>
-      <a class="px-3 py-2 rounded-lg hover:bg-slate-100" href="#materials">Material Choices</a>
-      <a class="px-3 py-2 rounded-lg hover:bg-slate-100" href="#design">Design Rules</a>
-      <a class="px-3 py-2 rounded-lg hover:bg-slate-100" href="#tolerances">Tolerances & Finishes</a>
-      <a class="px-3 py-2 rounded-lg hover:bg-slate-100" href="#tooling">Tooling & Fixturing</a>
-      <a class="px-3 py-2 rounded-lg hover:bg-slate-100" href="#compare">Comparisons</a>
-      <a class="px-3 py-2 rounded-lg hover:bg-slate-100" href="#prototype-to-production">Prototype→Production</a>
-      <a class="px-3 py-2 rounded-lg hover:bg-slate-100" href="#faqs">FAQs</a>
-      <a class="px-3 py-2 rounded-lg hover:bg-slate-100" href="#cta">Get a Quote</a>
-    </div>
-  </nav>
+  <!-- Table of Contents placed AFTER title, BEFORE intro -->
+  <div class="toc" role="navigation" aria-label="List of article headings">
+    <h2>On this page</h2>
+    <ul>
+      <li><a href="#introduction">Introduction</a></li>
+      <li><a href="#benefits">Benefits &amp; Trade-offs</a></li>
+      <li><a href="#pairings">Material Pairings</a></li>
+      <li><a href="#tolerances">Design &amp; Tolerances</a></li>
+      <li><a href="#manufacturing">Manufacturing &amp; Joining</a></li>
+      <li><a href="#quality">Quality &amp; Reliability</a></li>
+      <li><a href="#cost">Cost &amp; Lead Time</a></li>
+      <li><a href="#faqs">FAQs</a></li>
+      <li><a href="#conclusion">Conclusion</a></li>
+    </ul>
+  </div>
 
-  <main class="max-w-6xl mx-auto px-6 py-12 space-y-16">
-    <!-- Overview -->
-    <section id="overview" class="section-anchor">
-      <div class="pro-card p-8 md:p-10">
-        <h2 class="text-3xl md:text-4xl font-bold">Overview</h2>
-        <p class="mt-4 leading-8 text-slate-700">
-          <strong>Multi-material CNC machining</strong> is the practice of creating an assembly—or in some cases a single, co-machined body—that combines different materials to achieve a balance of strength, weight, thermal stability, corrosion resistance, electrical performance, and cost. 
-          Instead of forcing a single alloy or polymer to “do everything,” engineers blend the strengths of <em>aluminum 6061-T6</em> for lightness, <em>stainless steels (304/316)</em> for durability, <em>copper</em> for conductivity, <em>brass</em> for machinability, or <em>advanced plastics</em> like PEEK and acetal for wear and chemical resistance. 
-          The result can be a smarter product—fewer compromises, longer life, and often lower total cost of ownership.
-        </p>
-        <p class="mt-4 leading-8 text-slate-700">
-          There are two broad approaches. First is the <em>assembled strategy</em>, where components are machined separately and then joined with fasteners, press-fits, adhesives, brazing, or inserts. 
-          Second is the <em>co-fixtured strategy</em>, where multiple materials are held in a shared fixture and machined together to perfect datums and relative geometry. 
-          The latter demands careful planning—fixturing, toolpath sequencing, and heat management—but it can deliver exceptional alignment and a premium feel for precision mechanisms, optics mounts, and thermal-electrical interfaces.
-        </p>
+  <!-- Sections -->
+  <main>
+    <!-- Introduction -->
+    <section id="introduction" aria-labelledby="intro-h">
+      <div class="sec-head">
+        <h2 id="intro-h">Introduction</h2>
       </div>
+      <p>
+        “Multi material machining” describes the practice of engineering parts and assemblies that intentionally combine dissimilar materials, then producing them with coordinated subtractive, hybrid, or sequential processes. The goal is to place the right material in the right location: stiffness or fatigue life where loads peak, thermal stability around heat sources, wear resistance on contact surfaces, and chemical compatibility where fluids or sterilants are present. In parallel, designers aim to cut mass, shrink envelopes, and simplify maintenance by making components more modular and serviceable.
+      </p>
+      <p>
+        Interest in hybrid designs has grown with the broader adoption of CNC platforms capable of machining metals and plastics, modular fixturing, and precision joining methods that tolerate dissimilar substrates. Shops that offer digital quoting and DFM feedback—such as <a href="https://proleantech.com/" target="_blank" rel="noopener">ProleanTech</a>—lower the barrier to trying mixed-material builds because they expose process limits, holding strategies, and alternative routings early in the design loop.
+      </p>
+      <p>
+        Typical applications include lightweight drive modules, medical handling fixtures with soft-contact polymer jaws on aluminum frames, battery cooling plates combining copper and aluminum, corrosion-resistant stainless interfaces on cost-effective carbon steel bodies, and composite-metal overstructures for UAVs. The common thread is functional partitioning: each material plays to its strengths while the manufacturing plan keeps part count, scrap, and inspection complexity under control.
+      </p>
+      <p class="note">
+        Rule of thumb: strive for “material minimalism.” Use the minimum number of materials that achieve your requirements; every additional material increases interfaces, variation sources, and lifetime risk.
+      </p>
     </section>
 
-    <!-- How it works -->
-    <section id="how-it-works" class="section-anchor">
-      <div class="pro-card p-8 md:p-10">
-        <h2 class="text-3xl md:text-4xl font-bold">How Multi-Material CNC Machining Works</h2>
-        <div class="grid md:grid-cols-3 gap-6 mt-6">
-          <div class="p-6 rounded-2xl bg-slate-50" style="border:1px solid rgba(0,0,0,.08)">
-            <h3 class="font-semibold text-lg">1) Select Materials</h3>
-            <p class="mt-2 text-slate-700">
-              Choose complementary properties: stiffness vs. weight, thermal conductivity vs. electrical isolation, or corrosion resistance vs. cost. 
-              Consider galvanic compatibility and coefficient of thermal expansion (CTE) mismatch early.
-            </p>
-          </div>
-          <div class="p-6 rounded-2xl bg-slate-50" style="border:1px solid rgba(0,0,0,.08)">
-            <h3 class="font-semibold text-lg">2) Define Interfaces</h3>
-            <p class="mt-2 text-slate-700">
-              Use keyed features, alignment pins, dovetails, or stepped pockets to set datums. 
-              Decide on joining method: screws, press-fits, structural adhesives, or brazing for metals and polymer-metal hybrids.
-            </p>
-          </div>
-          <div class="p-6 rounded-2xl bg-slate-50" style="border:1px solid rgba(0,0,0,.08)">
-            <h3 class="font-semibold text-lg">3) Program Toolpaths</h3>
-            <p class="mt-2 text-slate-700">
-              Sequence roughing and finishing to minimize burrs at the interface. 
-              CAM strategies for dissimilar hardness and chip formation keep edges sharp and surfaces consistent.
-            </p>
-          </div>
-        </div>
-        <p class="mt-6 leading-8 text-slate-700">
-          For co-machined parts, fixturing may clamp the parent block (say, aluminum) while a copper slug or polymer insert is located by dowel pins. 
-          The machine probes each material to establish a shared coordinate system, then performs high-accuracy finishing in a single setup. 
-          On 5-axis equipment, datums can be maintained while accessing complex undercuts or compound angles, reducing stack-up error and rework.
-        </p>
+    <!-- Benefits & Trade-offs -->
+    <section id="benefits" aria-labelledby="benefits-h">
+      <div class="sec-head">
+        <h2 id="benefits-h">Benefits &amp; Trade-offs</h2>
       </div>
+      <h3>Key advantages</h3>
+      <ul>
+        <li><span class="pill">Performance</span>Blend high stiffness (steel/titanium) with low density (aluminum/carbon composites) to hit aggressive mass–stiffness targets.</li>
+        <li><span class="pill">Thermal</span>Place copper only where heat flux is concentrated and route the rest with aluminum to control cost and weight.</li>
+        <li><span class="pill">Durability</span>Use tool steels or ceramic inserts on wear faces while keeping housings in machinable, low-cost alloys.</li>
+        <li><span class="pill">Cost</span>Replace fully exotic material builds with strategic “caps,” “liners,” or “bushings” in premium materials.</li>
+        <li><span class="pill">Serviceability</span>Design sacrificial components (polymer pads, replaceable seats) to protect expensive precision geometry.</li>
+      </ul>
+      <h3>Trade-offs and risks</h3>
+      <ul>
+        <li><strong>Interfaces multiply variation:</strong> Flatness, parallelism, and positional errors stack at joints. Datum strategy becomes critical.</li>
+        <li><strong>Thermo-mechanical mismatch:</strong> Different CTEs (e.g., aluminum vs. steel) can induce stress, fretting, or seal leakage across temperature swings.</li>
+        <li><strong>Galvanic corrosion:</strong> Dissimilar metals in conductive electrolytes can corrode quickly without isolation or coatings.</li>
+        <li><strong>Process routing complexity:</strong> Fixturing and sequencing must protect finished features while allowing re-clamping for the next material operation.</li>
+        <li><strong>Compliance & validation:</strong> Additional material data, biocompatibility, or regulatory certificates may be required for medical/aerospace.</li>
+      </ul>
+      <p>
+        The decision to go multi-material is rarely binary. Many teams pilot with a “dual build”: one single-material baseline and one mixed-material prototype. Testing then informs whether the interface management overhead is repaid by performance or cost gains.
+      </p>
     </section>
 
-    <!-- Materials -->
-    <section id="materials" class="section-anchor">
-      <div class="pro-card p-8 md:p-10">
-        <h2 class="text-3xl md:text-4xl font-bold">Popular Material Combinations & Why They Work</h2>
-        <div class="grid md:grid-cols-2 gap-6 mt-6">
-          <article class="p-6 rounded-2xl bg-white" style="border:1px solid rgba(0,0,0,.08)">
-            <h3 class="font-semibold text-xl">Aluminum + Copper</h3>
-            <p class="mt-2 text-slate-700">
-              A classic thermal solution: aluminum provides structure with low mass while copper handles heat spreading or localized conduction. 
-              Use a pocketed aluminum base with a copper “coin” press-fit or bonded for heat source contact. 
-              Mind galvanic corrosion—seal interfaces with conformal coatings or non-conductive adhesives where relevant.
-            </p>
-          </article>
-          <article class="p-6 rounded-2xl bg-white" style="border:1px solid rgba(0,0,0,.08)">
-            <h3 class="font-semibold text-xl">Stainless Steel + Polymer (PEEK, Acetal)</h3>
-            <p class="mt-2 text-slate-700">
-              Ideal for wear components, food equipment, or chemical exposure. 
-              Steel provides stiffness and thread integrity; polymer adds low friction and electrical insulation. 
-              Use shoulder screws and precision pockets; avoid excessive press-fit on polymers to limit creep.
-            </p>
-          </article>
-          <article class="p-6 rounded-2xl bg-white" style="border:1px solid rgba(0,0,0,.08)">
-            <h3 class="font-semibold text-xl">Brass + Aluminum</h3>
-            <p class="mt-2 text-slate-700">
-              For knobs, optics mounts, and decorative elements. 
-              Brass machines beautifully for tight cosmetic features; aluminum keeps the assembly light. 
-              Consider black anodized aluminum matched with bead-blasted brass for a premium contrast.
-            </p>
-          </article>
-          <article class="p-6 rounded-2xl bg-white" style="border:1px solid rgba(0,0,0,.08)">
-            <h3 class="font-semibold text-xl">Titanium + Carbon-Fiber Plate</h3>
-            <p class="mt-2 text-slate-700">
-              High strength-to-weight and corrosion resistance with excellent stiffness. 
-              Use isolation washers or adhesive layers to protect carbon fibers from galvanic coupling with metals.
-            </p>
-          </article>
-        </div>
-        <p class="mt-6 leading-8 text-slate-700">
-          When mixing materials, track <em>CTE mismatch</em>. Tight interfaces that look perfect at 20 °C may loosen or stress-lock at 70 °C. 
-          For thermal stacks, align CTE by selecting alloys with closer expansion rates or design compliant features—slots, springs, or floating bushings—to absorb movement.
-        </p>
+    <!-- Material Pairings -->
+    <section id="pairings" aria-labelledby="pairings-h">
+      <div class="sec-head">
+        <h2 id="pairings-h">Material Pairings</h2>
       </div>
+      <h3>Metals + Metals</h3>
+      <p>
+        Common pairings include aluminum–steel for lightweight frames with hard mounting points; copper–aluminum for thermal plates and busbars; and stainless–carbon steel where corrosion control is localized to wetted surfaces. Keep an eye on galvanic potentials: stainless and carbon steel are closer than aluminum and copper, so the latter pairing demands electrical isolation or sealing.
+      </p>
+      <ul>
+        <li><strong>Al–Steel:</strong> High stiffness nodes (steel) on lightweight beams (Al). Use mechanical isolation (polymer washers) or conversion coatings to reduce galvanic coupling.</li>
+        <li><strong>Cu–Al:</strong> Excellent heat spreaders with localized high-conductivity copper inserts. Nickel plating on copper and anodizing Al can stabilize interfaces.</li>
+        <li><strong>Ti–Al:</strong> Aerospace-grade strength-to-weight; mind tool wear on Ti and plan conservative finishing feeds to minimize burrs before assembly.</li>
+      </ul>
+
+      <h3>Metals + Polymers</h3>
+      <p>
+        Metal cores deliver structure while polymers supply damping, wear reduction, electrical isolation, or patient-safe touch points. UHMW and PEEK are frequent choices for sliding contact; nylon and acetal are cost-effective for fixtures. Consider creep at load temperatures and design fasteners or features that distribute pressure.
+      </p>
+
+      <h3>Metals/Polymers + Composites</h3>
+      <p>
+        Carbon-fiber laminates add stiffness per weight, but machining requires sharp tools, controlled chip extraction, and sealed edges to avoid moisture ingress. Bonding to metals is effective if surfaces are prepared with abrasion and solvent cleaning; co-cured metal inserts are used when high bolt loads are expected.
+      </p>
+
+      <h3>Real-world patterns</h3>
+      <ul>
+        <li>Robotics grippers: 7075-T6 bodies with PEEK jaws; steel dowel seats for repeatability.</li>
+        <li>EV cooling: Al cold plates with copper inlay channels; laser-welded lids and post-op milling for flatness.</li>
+        <li>Lab automation: Stainless fluid path manifolds mated to anodized Al frames; EPDM or FKM seals isolate electrolytes.</li>
+      </ul>
     </section>
 
-    <!-- Design Rules -->
-    <section id="design" class="section-anchor">
-      <div class="pro-card p-8 md:p-10">
-        <h2 class="text-3xl md:text-4xl font-bold">Design Rules That Save Time and Money</h2>
-        <ul class="mt-4 space-y-4 text-slate-700 leading-8 list-disc pl-6">
-          <li><strong>Use clear, shared datums.</strong> Define A/B/C datums for the whole assembly and repeat them on each sub-part so QC can verify quickly.</li>
-          <li><strong>Prefer self-locating geometry.</strong> Steps, chamfered leads, and alignment pins reduce assembly time and eliminate guesswork.</li>
-          <li><strong>Mind tool access.</strong> Deep pockets across joints raise tool deflection and chatter. Add reliefs or split features between parts.</li>
-          <li><strong>Standardize fasteners.</strong> Use shared head styles and lengths. Where possible, design pocket depths to accept the same screw length across locations.</li>
-          <li><strong>Design to deburr.</strong> Micro chamfers (0.2–0.4 mm) reduce hand-finishing, especially at material interfaces where burrs are more visible.</li>
-          <li><strong>Plan for coatings.</strong> Anodizing, electroless nickel, or passivation change dimensions. Call out post-coat fits and mask areas that must remain conductive.</li>
-          <li><strong>Control interfaces by function.</strong> Cosmetic joints can tolerate looser gaps; load-bearing joints need interference or precision fits.</li>
-        </ul>
-        <p class="mt-4 leading-8 text-slate-700">
-          The best designs “expose” critical features to a final finishing setup. In multi-material parts, that may mean machining a pocket and insert, then performing a skim cut across both to ensure coplanarity or true position across materials.
-        </p>
+    <!-- Design & Tolerances -->
+    <section id="tolerances" aria-labelledby="tolerances-h">
+      <div class="sec-head">
+        <h2 id="tolerances-h">Design &amp; Tolerances</h2>
       </div>
+      <h3>Datum strategy</h3>
+      <p>
+        Treat each material sub-component as its own part with <em>functional datums</em> aligned to the final assembly. When re-clamping is required, create robust, machinable datums—counterbored dowel holes, ground pads, or sacrificial tabs—that survive multiple operations. Keep measuring datums accessible after joining for verification.
+      </p>
+
+      <h3>Tolerance allocation</h3>
+      <p>
+        Split tolerances between manufacturing capability and assembly compensation. Holes for steel dowels in aluminum should account for differential CTE: a slip fit at 20&nbsp;°C can become an interference fit at 70&nbsp;°C if the aluminum grows significantly more than steel. Use positional tolerances with MMC and include temperature notes when relevant.
+      </p>
+
+      <h3>Feature design</h3>
+      <ul>
+        <li>Prefer <strong>locating dowels + clearance bolts</strong> over all close-fit bolts to avoid over-constraint.</li>
+        <li>Design <strong>isolation layers</strong> (thin polymer shims, anodize) where galvanic couples could exist.</li>
+        <li>Use <strong>stepped joints</strong> or <strong>rabbet seats</strong> to improve shear transfer and self-location.</li>
+        <li>Add <strong>tool access</strong> (wrench flats, driver channels) so mating doesn’t damage finished faces.</li>
+      </ul>
+
+      <h3>Surface finish & geometrical control</h3>
+      <p>
+        Mixed assemblies concentrate precision at interfaces. Specify tight flatness and surface finish on mating pads while relaxing cosmetic faces. For bonded joints, a slightly roughened surface (e.g., 180–220 grit) can improve adhesion; for welded/brazed joints, specify post-weld machining allowances on critical planes.
+      </p>
     </section>
 
-    <!-- Tolerances & Finishes -->
-    <section id="tolerances" class="section-anchor">
-      <div class="pro-card p-8 md:p-10">
-        <h2 class="text-3xl md:text-4xl font-bold">Tolerances & Surface Finishes</h2>
-        <p class="mt-4 leading-8 text-slate-700">
-          Typical CNC machining holds ±0.05 mm (±0.002″) without much effort on modern equipment. For multi-material fits—especially press-fits—a tighter band of ±0.01–0.02 mm is common, depending on material hardness and temperature at assembly. 
-          Surface finishes in the range of <em>Ra 1.6–3.2 µm</em> are suitable for general parts; bearing fits or thermal interfaces may target <em>Ra 0.8 µm</em> or better and benefit from reaming, honing, or lapping.
-        </p>
-        <div class="grid md:grid-cols-3 gap-6 mt-6">
-          <div class="p-6 rounded-2xl bg-slate-50" style="border:1px solid rgba(0,0,0,.08)">
-            <h3 class="font-semibold">Press-Fit Guide</h3>
-            <p class="mt-2 text-slate-700">
-              For aluminum pocket + copper coin, aim for 0.01–0.03 mm interference on diameters ≤30 mm. 
-              Freeze the coin or warm the pocket for gentler assembly, and chamfer the lead.
-            </p>
-          </div>
-          <div class="p-6 rounded-2xl bg-slate-50" style="border:1px solid rgba(0,0,0,.08)">
-            <h3 class="font-semibold">Adhesive Bonds</h3>
-            <p class="mt-2 text-slate-700">
-              Structural epoxies with surface prep (etch, scuff, clean) deliver excellent joint strength while isolating galvanic couples. 
-              Design fillets so squeeze-out doesn’t interfere with assemblies.
-            </p>
-          </div>
-          <div class="p-6 rounded-2xl bg-slate-50" style="border:1px solid rgba(0,0,0,.08)">
-            <h3 class="font-semibold">Coatings</h3>
-            <p class="mt-2 text-slate-700">
-              Black anodizing on aluminum pairs well with nickel on steel for corrosion and wear. 
-              Mask conductive lands and threaded interfaces; call out post-coat dimensions where critical.
-            </p>
-          </div>
-        </div>
+    <!-- Manufacturing & Joining -->
+    <section id="manufacturing" aria-labelledby="manufacturing-h">
+      <div class="sec-head">
+        <h2 id="manufacturing-h">Manufacturing &amp; Joining</h2>
       </div>
+      <h3>Machining routes</h3>
+      <p>
+        In practice, most hybrid builds follow a <strong>pre-machine → join → finish-machine</strong> flow. Pre-machining brings each material close to net shape, preserving stock on critical faces. After joining, finishing trims interfaces, restores flatness/parallelism, and re-establishes datums. Keep heat input low between pre- and finish- operations to protect size and shape.
+      </p>
+
+      <h3>Joining methods</h3>
+      <ul>
+        <li><strong>Mechanical:</strong> Bolts, rivets, and swage inserts are predictable, serviceable, and inspection-friendly. Use dissimilar-metal isolation where needed.</li>
+        <li><strong>Adhesive bonding:</strong> Epoxies and acrylics deliver uniform stress distribution and seal interfaces. Surface prep (abrade + clean) is decisive.</li>
+        <li><strong>Brazing/soldering:</strong> Ideal for Cu–Al or Cu–SS heat exchangers with managed filler and flux residues; plan for post-braze machining.</li>
+        <li><strong>Welding (solid-state & fusion):</strong> Friction stir for Al–Al or tailored blanks; laser for precise, low-distortion seams; TIG/MIG for standard joints.</li>
+        <li><strong>Insert molding/overmolding:</strong> Metal skeletons with molded polymer skins for damping and ergonomics; design undercuts and vents for flow.</li>
+      </ul>
+
+      <h3>Fixturing & sequencing</h3>
+      <p>
+        Use modular fixtures with hard stops for repeatability; add soft jaws for polymer contact. Sequence so that high-energy processes (weld, braze) occur before precision finishing. Where heat cannot come first, protect finished faces with masks and use low-heat adhesives or fasteners.
+      </p>
+
+      <h3>Tooling considerations</h3>
+      <ul>
+        <li>Carbide end mills with appropriate coatings (TiAlN for steels, ZrN for Al) reduce built-up edge across materials.</li>
+        <li>Dedicated tools for polymers prevent contamination and inconsistent finish.</li>
+        <li>For composites, use compression cutters and strong dust extraction; seal cut edges.</li>
+      </ul>
     </section>
 
-    <!-- Tooling & Fixturing -->
-    <section id="tooling" class="section-anchor">
-      <div class="pro-card p-8 md:p-10">
-        <h2 class="text-3xl md:text-4xl font-bold">Tooling & Fixturing Strategies</h2>
-        <p class="mt-4 leading-8 text-slate-700">
-          Fixturing is where multi-material projects succeed or fail. The fixture must locate parts reliably, keep chips from lodging at interfaces, and control heat so differential expansion doesn’t distort geometry mid-cut. 
-          Soft jaws with replaceable buttons, vacuum fixtures for thin sheets, or modular plates with locating pins all have a place. 
-          When finishing across different hardness (e.g., aluminum next to brass), use conservative stepovers and a sharp, high-helix finishing tool to balance cutting pressures.
-        </p>
-        <ul class="mt-4 space-y-3 text-slate-700 leading-8 list-disc pl-6">
-          <li><strong>Probe early, probe often.</strong> Touch off on each material insert to confirm Z heights before finishing passes.</li>
-          <li><strong>Sequence for stability.</strong> Rough cavities in the parent material, seat the insert, then finish both with light cuts to perfect alignment.</li>
-          <li><strong>Manage burrs.</strong> Add back-chamfers and spring-pass toolpaths to clean edges that traverse dissimilar materials.</li>
-        </ul>
+    <!-- Quality & Reliability -->
+    <section id="quality" aria-labelledby="quality-h">
+      <div class="sec-head">
+        <h2 id="quality-h">Quality &amp; Reliability</h2>
       </div>
+      <h3>Inspection plan</h3>
+      <p>
+        Hybrid builds demand a layered inspection plan. Start with incoming certificates for each material, then in-process checks on datums and critical features, and end with assembly-level verification: dowel-to-hole positions, interface flatness, and leakage or resistance tests if applicable. Use the same coordinate system through the traveler.
+      </p>
+
+      <h3>Environmental durability</h3>
+      <p>
+        Validate thermal cycling, vibration, and humidity exposure with fixtures that stress the most fragile interfaces. For galvanic pairs, salt-spray or cyclic corrosion tests reveal coating and seal weaknesses. In medical or food equipment, include sterilization cycles in the test matrix to check polymer creep and seal compression sets.
+      </p>
+
+      <h3>Risk controls</h3>
+      <ul>
+        <li>Design in <strong>secondary retention</strong> (wirelocks, threadlocker, stake features) for fastened joints.</li>
+        <li>Specify <strong>coating systems</strong> tailored to the pair: e.g., hardcoat anodize + nickel on copper inserts.</li>
+        <li>Standardize <strong>torque procedures</strong> and re-torque after temperature stabilization to eliminate embedment loss.</li>
+      </ul>
     </section>
 
-    <!-- Comparisons -->
-    <section id="compare" class="section-anchor">
-      <div class="pro-card p-8 md:p-10">
-        <h2 class="text-3xl md:text-4xl font-bold">How It Compares to Other Methods</h2>
-        <div class="grid md:grid-cols-3 gap-6 mt-6">
-          <div class="p-6 rounded-2xl bg-white" style="border:1px solid rgba(0,0,0,.08)">
-            <h3 class="font-semibold text-lg">CNC vs. Additive</h3>
-            <p class="mt-2 text-slate-700">
-              Multi-material 3D printing is improving, but mechanical properties and surface finish often trail CNC. 
-              CNC shines when you need tight tolerances, metal-to-metal fits, and production-grade cosmetics.
-            </p>
-          </div>
-          <div class="p-6 rounded-2xl bg-white" style="border:1px solid rgba(0,0,0,.08)">
-            <h3 class="font-semibold text-lg">CNC vs. Molding + Inserts</h3>
-            <p class="mt-2 text-slate-700">
-              Overmolding around machined inserts is great for volume, but tool costs are high, and design changes are slower. 
-              CNC is agile for iterative design and mid-volume production.
-            </p>
-          </div>
-          <div class="p-6 rounded-2xl bg-white" style="border:1px solid rgba(0,0,0,.08)">
-            <h3 class="font-semibold text-lg">CNC + Assembly</h3>
-            <p class="mt-2 text-slate-700">
-              The most common hybrid path: machine parts separately, then join. 
-              It scales well, allows different finishes on each piece, and simplifies rework or upgrades later.
-            </p>
-          </div>
-        </div>
+    <!-- Cost & Lead Time -->
+    <section id="cost" aria-labelledby="cost-h">
+      <div class="sec-head">
+        <h2 id="cost-h">Cost &amp; Lead Time</h2>
       </div>
+      <h3>Cost drivers</h3>
+      <ul>
+        <li><strong>Part count & interfaces:</strong> Every joint adds machining, handling, and inspection minutes.</li>
+        <li><strong>Material premiums:</strong> Copper, titanium, and high-temp polymers can dominate BOM even in small volumes.</li>
+        <li><strong>Special processes:</strong> Plating, heat treat, bonding cure, or weld qualification each insert calendar time.</li>
+        <li><strong>Tolerance stack mitigation:</strong> Precision grinding or lapping after assembly may be required for flatness and parallelism.</li>
+      </ul>
+      <h3>Lead-time tactics</h3>
+      <ul>
+        <li>Parallelize machining of different materials; converge at joining and finishing.</li>
+        <li>Use vendor-neutral specs (e.g., alloy families) early, lock exact grades after availability checks.</li>
+        <li>Design for <strong>process flexibility</strong>: allow either bond or fasten where feasible so supply issues don’t stall builds.</li>
+      </ul>
+      <p class="note">
+        Early conversations with a capable manufacturing partner shorten loops. Fast DFM feedback, alternative routings, and stock-on-hand checks can be difference-makers on tight schedules.
+      </p>
     </section>
 
-    <!-- Prototype to Production -->
-    <section id="prototype-to-production" class="section-anchor">
-      <div class="pro-card p-8 md:p-10">
-        <h2 class="text-3xl md:text-4xl font-bold">From Prototype to Production</h2>
-        <p class="mt-4 leading-8 text-slate-700">
-          Start simple: prove the interface with two materials in a benchtop fixture. 
-          Validate press-fit forces, adhesive cure time, and thermal performance with a basic instrumented test. 
-          Once the interface passes, lock the datums and define inspection points—CMM for holes and slots, optical or laser for delicate edges. 
-          For production, build a <em>Process Failure Modes and Effects Analysis (PFMEA)</em> around burrs, bond failures, and coating thickness variance. 
-          Add in-process checks, like a probing cycle to verify height after an insert is seated, or a go/no-go gauge for fit features.
-        </p>
-        <p class="mt-4 leading-8 text-slate-700">
-          Cost control comes from cycle-time reduction and predictable yield. 
-          Group operations by tool family, share fastener lengths, and design sub-assemblies that can be tested independently. 
-          When a design demands very tight cosmetic seams, budget time for hand-finishing or specify a micro-chamfer that creates a deliberate, crisp shadow line instead of chasing a perfect flush surface.
-        </p>
+    <!-- FAQs (collapsible) placed BEFORE Conclusion -->
+    <section id="faqs" aria-labelledby="faqs-h">
+      <div class="sec-head">
+        <h2 id="faqs-h">FAQs</h2>
       </div>
+
+      <details>
+        <summary>How do I prevent galvanic corrosion between aluminum and copper?</summary>
+        <p>Electrically isolate the pair (non-conductive shim or adhesive layer), seal out electrolytes, and consider plating copper (e.g., nickel) plus anodizing aluminum. Design drainage to avoid standing fluid.</p>
+      </details>
+
+      <details>
+        <summary>What tolerances are realistic for a bonded metal–polymer interface?</summary>
+        <p>Expect ±0.05–0.1&nbsp;mm on critical locations post-cure with stable tooling. If you need tighter, post-bond finish machining on hard references is recommended.</p>
+      </details>
+
+      <details>
+        <summary>When is adhesive better than fasteners?</summary>
+        <p>For thin sections, vibration damping, or where uniform stress and sealing are important. Fasteners win for serviceability and high clamp loads. Many designs combine both.</p>
+      </details>
+
+      <details>
+        <summary>Can I machine composites and aluminum in the same setup?</summary>
+        <p>Yes, but plan chip/dust management and tool changes. Generally cut composites last to avoid fiber contamination; seal edges immediately if moisture is a concern.</p>
+      </details>
+
+      <details>
+        <summary>What about differential thermal expansion?</summary>
+        <p>Use slotted holes, floating bushings, or compliant adhesive layers. Document the reference temperature in your drawing notes and simulate extremes in test.</p>
+      </details>
     </section>
 
-    <!-- FAQs -->
-    <section id="faqs" class="section-anchor">
-      <div class="pro-card p-8 md:p-10">
-        <h2 class="text-3xl md:text-4xl font-bold">Frequently Asked Questions</h2>
-        <div class="divide-y divide-slate-200">
-          <details class="py-4 group">
-            <summary class="font-semibold text-lg cursor-pointer flex items-center justify-between">
-              What’s the fastest way to validate a multi-material interface?
-              <span class="ml-4 text-slate-400 group-open:rotate-180 transition-transform">▼</span>
-            </summary>
-            <p class="mt-2 text-slate-700 leading-8">
-              Machine a minimal coupon pair with production geometry for the interface only. 
-              Test assembly force, retention, and thermal or electrical performance. 
-              Iterate pocket size or bond gap before cutting the full assembly.
-            </p>
-          </details>
-          <details class="py-4 group">
-            <summary class="font-semibold text-lg cursor-pointer flex items-center justify-between">
-              How do I prevent galvanic corrosion?
-              <span class="ml-4 text-slate-400 group-open:rotate-180 transition-transform">▼</span>
-            </summary>
-            <p class="mt-2 text-slate-700 leading-8">
-              Choose materials close on the galvanic series, isolate with adhesives or coatings, control moisture ingress, and avoid trapped electrolytes by adding drain paths or sealants.
-            </p>
-          </details>
-          <details class="py-4 group">
-            <summary class="font-semibold text-lg cursor-pointer flex items-center justify-between">
-              Can I co-machine metals and plastics in one setup?
-              <span class="ml-4 text-slate-400 group-open:rotate-180 transition-transform">▼</span>
-            </summary>
-            <p class="mt-2 text-slate-700 leading-8">
-              Yes, but manage heat and clamping pressure. Use sharp tools, conservative chip loads for plastics, and consider a sacrificial support to prevent distortion. 
-              Probe the plastic surface right before finishing for best Z accuracy.
-            </p>
-          </details>
-          <details class="py-4 group">
-            <summary class="font-semibold text-lg cursor-pointer flex items-center justify-between">
-              What tolerances are realistic for the interface?
-              <span class="ml-4 text-slate-400 group-open:rotate-180 transition-transform">▼</span>
-            </summary>
-            <p class="mt-2 text-slate-700 leading-8">
-              For most shops, ±0.02 mm on critical fits is achievable with temperature control and stable fixturing. 
-              If you need tighter, specify a finish pass across both materials in the same setup and align inspection to that datum.
-            </p>
-          </details>
-        </div>
+    <!-- Conclusion -->
+    <section id="conclusion" aria-labelledby="conclusion-h">
+      <div class="sec-head">
+        <h2 id="conclusion-h">Conclusion</h2>
       </div>
-    </section>
-
-    <!-- CTA -->
-    <section id="cta" class="section-anchor">
-      <div class="pro-card p-8 md:p-10 text-center bg-gradient-to-br from-white to-slate-50">
-        <h2 class="text-3xl md:text-4xl font-bold">Ready to Build Your Multi-Material Part?</h2>
-        <p class="mt-4 text-slate-700 leading-8">
-          Share a STEP file and a brief note about materials, quantities, and finish. 
-          We’ll review for manufacturability, suggest cost-savvy tweaks, and provide a clear lead-time estimate.
-        </p>
-        <div class="mt-6 flex items-center justify-center gap-4">
-          <a href="#overview" class="rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 font-semibold">Review the Basics</a>
-          <a href="mailto:quotes@example.com?subject=Multi-Material%20CNC%20RFQ" class="rounded-xl bg-white hover:bg-slate-50 border border-indigo-100 text-indigo-700 px-6 py-3 font-semibold">Email Your RFQ</a>
-        </div>
-        <p class="mt-4 text-sm text-slate-500"><a class="underline" href="#toc">Back to Table of Contents</a></p>
-      </div>
+      <p>
+        Multi material machining is a practical path to higher performance without resorting to fully exotic builds. The approach thrives on good interface design: clear datums, realistic tolerance splits, and joining methods matched to the materials and service environment. Pairings like Al–Steel, Cu–Al, and Metal–Polymer unlock weight, thermal, and wear advantages when you control galvanic couples and thermal mismatch. A disciplined manufacturing route—pre-machine, join, finish—keeps variation visible and correctable.
+      </p>
+      <p>
+        Looking ahead, expect more <em>hybrid</em> workflows: additive + machining for localized copper features, solid-state joining for dissimilar metals, and data-driven inspection linking every sub-op to the assembly coordinate system. With thoughtful design and the right production partner, multi-material solutions deliver compelling gains in function, reliability, and total cost.
+      </p>
     </section>
   </main>
 
-  <footer class="max-w-6xl mx-auto px-6 pb-16">
-    <div class="pro-card p-8 md:p-10">
-      <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-        <p class="text-slate-600">© <span id="year"></span> Multi-Material CNC Machining Guide. All rights reserved.</p>
-        <div class="flex gap-4 text-slate-600">
-          <a class="hover:text-slate-900" href="#faqs">FAQs</a>
-          <a class="hover:text-slate-900" href="#compare">Comparisons</a>
-          <a class="hover:text-slate-900" href="#design">Design Rules</a>
-        </div>
-      </div>
-    </div>
+  <!-- Footer -->
+  <footer>
+    <p>© <span id="year"></span> Multi Material Machining — Built for engineers, designers, and manufacturing professionals.</p>
+    <p><a href="#top">Back to top</a></p>
   </footer>
 
+  <!-- Minimal JS for reveal-on-scroll & year -->
   <script>
-    // Set current year
+    // Reveal sections on scroll (fade/slide-up)
+    const sections = document.querySelectorAll('section');
+    const observer = new IntersectionObserver((entries)=>{
+      entries.forEach(entry=>{
+        if(entry.isIntersecting){
+          entry.target.classList.add('revealed');
+          observer.unobserve(entry.target);
+        }
+      });
+    },{threshold:0.12, rootMargin:'0px 0px -40px 0px'});
+    sections.forEach(s=>observer.observe(s));
+
+    // Current year
     document.getElementById('year').textContent = new Date().getFullYear();
   </script>
 </body>
